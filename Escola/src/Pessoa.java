@@ -1,7 +1,25 @@
 public class Pessoa {
 
-    String nome, cpf, telefone, genero;
-    int idade, matricula;
+    private String nome, cpf, telefone, genero;
+    private int idade, matricula;
+
+    public Pessoa(){
+
+    }
+
+    public Pessoa(String nome, String cpf, String telefone, String genero, int idade, int matricula) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.genero = genero;
+        this.idade = idade;
+        this.matricula = matricula;
+    }
+
+    public Pessoa(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+    }
 
     public String getNome() {
         return nome;
@@ -49,5 +67,17 @@ public class Pessoa {
 
     public void setMatricula(int matricula) {
         this.matricula = matricula;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", genero='" + genero + '\'' +
+                ", idade=" + idade +
+                ", matricula=" + matricula +
+                '}';
     }
 }

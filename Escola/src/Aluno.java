@@ -1,6 +1,24 @@
 public class Aluno extends Pessoa{
-    String turma;
-    double nota1, nota2, nota3, media;
+    private String turma;
+    private double nota1, nota2, nota3, media;
+
+    public Aluno(){
+
+    }
+    public Aluno(String nome, String cpf, String turma){
+        super(nome, cpf);
+        this.turma = turma;
+
+    }
+
+    public Aluno(String nome, String cpf, String telefone, String genero, int idade, int matricula, String turma, double nota1, double nota2, double nota3, double media) {
+        super(nome, cpf, telefone, genero, idade, matricula);
+        this.turma = turma;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.nota3 = nota3;
+        this.media = media;
+    }
 
     public String getTurma() {
         return turma;
@@ -40,5 +58,16 @@ public class Aluno extends Pessoa{
 
     public void setMedia(double media) {
         this.media = media;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Aluno{" +
+                "turma='" + turma + '\'' +
+                ", nota1=" + nota1 +
+                ", nota2=" + nota2 +
+                ", nota3=" + nota3 +
+                ", media=" + media +
+                '}';
     }
 }
