@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Main2 {
     static Scanner tec = new Scanner(System.in);
+
     public static void main(String[] args) {
         ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
         ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();
