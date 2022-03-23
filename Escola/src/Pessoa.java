@@ -1,9 +1,8 @@
 public class Pessoa {
-
     private String nome, cpf, telefone, genero;
     private int idade, matricula;
 
-    public Pessoa(){
+    public Pessoa() {
 
     }
 
@@ -71,14 +70,11 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", genero='" + genero + '\'' +
-                ", idade=" + idade +
-                ", matricula=" + matricula +
-                '}';
+        return "Nome= " + nome +
+                "\nCPF= " + cpf +
+                "\nTelefone= " + telefone +
+                "\nGênero= " + genero +
+                "\nIdade= " + idade +
+                "\nMatrícula= " + matricula;
     }
-
 }
