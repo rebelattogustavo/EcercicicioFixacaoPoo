@@ -26,13 +26,13 @@ public class Main2 {
                 int opcaoTipo = selecionaTipo("Cadastrar");
                 switch (opcaoTipo) {
                     case 1:
-                        listaProfessores.add(coletaDadosProfessor());
+                        listaProfessores.add(coletaDadosProfessor(listaProfessores,listaAlunos));
                         break;
                     case 2:
-                        listaAlunos.add(coletaDadosAluno());
+                        listaAlunos.add(coletaDadosAluno(listaProfessores,listaAlunos));
                         break;
                     case 3:
-                        Turma.listaTurmas.add(coletaDadosTurma());
+                        Turma.listaTurmas.add(coletaDadosTurma(listaProfessores,listaAlunos));
                         break;
                     case 4:
                         Materia.listaMaterias.add(coletaDadosMateria());
@@ -56,7 +56,7 @@ public class Main2 {
                         if (indice != -1) {
                             switch (opcaoEditar) {
                                 case 1:
-                                    listaProfessores.set(indice, coletaDadosProfessor());
+                                    listaProfessores.set(indice, coletaDadosProfessor(listaProfessores,listaAlunos));
                                     break;
                                 case 2:
                                     editaAtributo(selecionaAtributo(opcaoTipo), opcaoTipo, indice, listaProfessores, listaAlunos);
@@ -69,7 +69,7 @@ public class Main2 {
                         if (indice != -1) {
                             switch (opcaoEditar) {
                                 case 1:
-                                    listaAlunos.set(indice, coletaDadosAluno());
+                                    listaAlunos.set(indice, coletaDadosAluno(listaProfessores,listaAlunos));
                                     break;
                                 case 2:
                                     editaAtributo(selecionaAtributo(opcaoTipo), opcaoTipo, indice, listaProfessores, listaAlunos);
@@ -247,7 +247,7 @@ public class Main2 {
         return -1;
     }
 
-    private static Aluno coletaDadosAluno() {
+    private static Aluno coletaDadosAluno(ArrayList<Professor> listaProfessores, ArrayList<Aluno> listaAlunos) {
         Pessoa pessoa = coletaDadosPessoa();
 
         System.out.println("Conforme as turmas abaixo: ");
@@ -259,6 +259,9 @@ public class Main2 {
         for(int i =0; i<Turma.listaTurmas.size();i++){
             if (codigo == Turma.listaTurmas.get(i).getCodigo()){
                 indice = i;
+            }else{
+                System.out.println("Turma não encontrada");
+                menu(listaProfessores,listaAlunos);
             }
         }
         Aluno aluno = new Aluno(pessoa.getNome(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getGenero(), pessoa.getIdade(), pessoa.getMatricula(), Turma.listaTurmas.get(indice));
@@ -267,7 +270,7 @@ public class Main2 {
 
     private static void listarTurmas(){
         for(int i=0; i<Turma.listaTurmas.size(); i++){
-            Turma.listaTurmas.get(i).toString();
+            System.out.println(Turma.listaTurmas.get(i).toString());
         }
     }
 
@@ -278,7 +281,7 @@ public class Main2 {
     }
 
 
-    private static Professor coletaDadosProfessor() {
+    private static Professor coletaDadosProfessor(ArrayList<Professor> listaProfessores, ArrayList<Aluno> listaAlunos) {
         ArrayList<Materia> listaMaterias = new ArrayList<>();
         Pessoa pessoa = coletaDadosPessoa();
         System.out.println("Conforme a lista de matérias: ");
@@ -291,6 +294,9 @@ public class Main2 {
             for (int i =0;i < Materia.listaMaterias.size(); i++){
                 if(codigo == Materia.listaMaterias.get(i).getCodigo()){
                     listaMaterias.add(Materia.listaMaterias.get(i));
+                }else{
+                    System.out.println("Matéria não encontrada!");
+                    menu(listaProfessores,listaAlunos);
                 }
             }
             System.out.println("Deseja adicionar mais uma?");
@@ -322,7 +328,7 @@ public class Main2 {
         return pessoa;
     }
 
-    public static Turma coletaDadosTurma(){
+    public static Turma coletaDadosTurma(ArrayList<Professor> listaProfessores, ArrayList<Aluno> listaAlunos){
         ArrayList<Materia> listaMaterias = new ArrayList<>();
         System.out.println("Insira os dados:" +
                 "\nNome: ");
@@ -333,18 +339,21 @@ public class Main2 {
         System.out.println("Conforme as matérias abaixo: ");
         listarMaterias();
 
-        char resp = 'n';
+        char resp = 's';
         do{
             System.out.println("Informe o código das matérias que deseja inserir na turma");
             int codigo2 = sc.nextInt();
             for (int i =0;i < Materia.listaMaterias.size(); i++){
                 if(codigo2 == Materia.listaMaterias.get(i).getCodigo()){
                     listaMaterias.add(Materia.listaMaterias.get(i));
+                }else{
+                    System.out.println("Matéria não encontrada!");
+                    menu(listaProfessores,listaAlunos);
                 }
             }
             System.out.println("Deseja adicionar mais uma?");
             resp = sc.next().charAt(0);
-        }while(resp == 'n' || resp == 'N');
+        }while(resp == 's' || resp == 'S');
 
         Turma turma = new Turma(nome, codigo, listaMaterias);
         return turma;
